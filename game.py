@@ -16,7 +16,7 @@ class Game:
         self.score = 0
         # main game logic
         while self.is_alive:
-            print(f"What beats {self.current_object}?")
+            print(f"What beats {self.current_object}{utils.find_closest_emoji(self.current_object)}?")
             print(f"Current score: {self.score}")
             player_choice = input("Input: ")
 
@@ -29,12 +29,12 @@ class Game:
             explanation = utils.get_explanation(self.client, self.current_object, player_choice, relationship)
 
             if relationship == 'not beat':
-                print(f"{player_choice.title()} does not beat {self.current_object.title()}. {explanation}")
+                print(f"{player_choice.title()}{utils.find_closest_emoji(player_choice)} does not beat {self.current_object.title()}{utils.find_closest_emoji(self.current_object)}.\n{explanation}")
                 print(f"Final score: {self.score}")
                 break
 
             # at this point the player could only win
-            print(f"{player_choice.title()} beats {self.current_object.title()}. {explanation}")
+            print(f"{player_choice.title()}{utils.find_closest_emoji(player_choice)} beats {self.current_object.title()}{utils.find_closest_emoji(self.current_object)}.\n{explanation}")
             self.score += 1
             self.has_been_played.add(player_choice.lower())
             self.current_object = player_choice
